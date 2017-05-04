@@ -1,0 +1,7 @@
+#或略文件夹内容#
+.vscode/
+.idea/
+node_modules/
+#忽略文件内容#
+.DS_Store
+*.log
