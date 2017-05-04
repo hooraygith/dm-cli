@@ -3,13 +3,18 @@
 const shell = require('shelljs');
 const config = require('./config/index.js');
 const chalk = require('chalk');
+const ora = reuqire('ora');
 
+let command1 = `npm outdated --json --registry=${config.registry}`; //检查需要更新的包
+let command2 = `npm i `; //更新包
+
+let spinner = ora(command1).start();//加载动画
 let updateRs = shell.exec(`npm outdated --json --registry=${config.registry}`, {
     silent: true
 }).stdout;
 
 if (!updateRs) {
-    console.log(chalk.green('Already up-to-date!'));
+    spinner.succeed('Already up-to-date!');
     process.exit(0)
 }
 
@@ -28,8 +33,12 @@ for (let i in updateJson) {
 }
 
 if (updatePkg.length == 0) {
-    console.log(chalk.green('Already up-to-date!'));
+    spinner.succeed('Already up-to-date!');
     process.exit(0)
 }
 
+let date = new Date();
+command2 += updatePkg.join(' ');
+spinner.start(command2);
 shell.exec(`npm i ${updatePkg.join(' ')} --registry=${config.registry}`)
+spinner.succeed(`end ${(new Date().getTime() - date1)/1000} s`)
