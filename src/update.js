@@ -3,7 +3,7 @@
 const shell = require('shelljs');
 const config = require('./config/index.js');
 const chalk = require('chalk');
-const ora = reuqire('ora');
+const ora = require('ora');
 
 let command1 = `npm outdated --json --registry=${config.registry}`; //检查需要更新的包
 let command2 = `npm i `; //更新包
