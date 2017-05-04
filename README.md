@@ -1,2 +1,2 @@
-# pc-web-cli
-pc.web.bin工具
+# dm-cli
+打包脚本集成
