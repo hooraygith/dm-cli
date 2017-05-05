@@ -24,7 +24,7 @@ if (!shell.test('-f', `${_DIR}/build/webpack.config.${program.env}.js`)) {
 console.log(chalk.yellow('============compile============'))
 
 //compile前置钩子
-if (!shell.test('-f', `${_DIR}/build/build-pre.js`)) {
+if (shell.test('-f', `${_DIR}/build/build-pre.js`)) {
     shell.exec(`node ${_DIR}/build/build-pre.js`, {
         silent: true
     });
@@ -43,7 +43,7 @@ compiler.run((err, stats) => {
     }))
 
     // compile 后置钩子
-    if (!shell.test('-f', `${_DIR}/build/build-post.js`)) {
+    if (shell.test('-f', `${_DIR}/build/build-post.js`)) {
         shell.exec(`node ${_DIR}/build/build-post.js`, {
             silent: true
         });
