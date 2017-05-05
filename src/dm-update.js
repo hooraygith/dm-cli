@@ -38,7 +38,7 @@ if (updatePkg.length == 0) {
 }
 
 let date = new Date();
-command2 += updatePkg.join(' ');
+command2 = command2 + updatePkg.join(' ') + '\n';
 spinner.start(command2);
 shell.exec(`npm i ${updatePkg.join(' ')} --registry=${config.registry}`)
 spinner.succeed(`end ${(new Date().getTime() - date)/1000} s`)
