@@ -41,4 +41,4 @@ let date = new Date();
 command2 += updatePkg.join(' ');
 spinner.start(command2);
 shell.exec(`npm i ${updatePkg.join(' ')} --registry=${config.registry}`)
-spinner.succeed(`end ${(new Date().getTime() - date1)/1000} s`)
+spinner.succeed(`end ${(new Date().getTime() - date)/1000} s`)
