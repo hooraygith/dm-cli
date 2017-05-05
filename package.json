@@ -5,7 +5,7 @@
   "author": "otherlite@gmail.com",
   "license": "MIT",
   "bin": {
-    "dm": "src/index.js"
+    "dm": "src/dm.js"
   },
   "scripts": {
     "postversion": "git push --tags",
