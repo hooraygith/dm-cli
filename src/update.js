@@ -7,8 +7,8 @@ const ora = require('ora');
 
 let command1 = `npm outdated --json --registry=${config.registry}`; //检查需要更新的包
 let command2 = `npm i `; //更新包
+let spinner = ora(command1).start(); //加载动画
 
-let spinner = ora(command1).start();//加载动画
 let updateRs = shell.exec(`npm outdated --json --registry=${config.registry}`, {
     silent: true
 }).stdout;

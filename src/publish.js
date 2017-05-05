@@ -6,7 +6,8 @@ const config = require('./config/index.js');
 const chalk = require('chalk');
 const program = require('commander');
 
-let newVersion = '';
+
+let type = '';
 let envs = ['dev','pd'];
 let cmds = [
     'update',
@@ -17,12 +18,12 @@ let cmds = [
 program
     .arguments('[newVersion]')
     .action(val => {
-        newVersion = val;
+        type = val;
     })
     .parse(process.argv);
 
-//todo 用semver升级版本号；semver.inc(newVersion)
-cmds.push('npm --no-git-tag-version version ' + newVersion);
+//todo 用semver升级版本号；semver.inc(type)
+cmds.push('npm --no-git-tag-version version ' + type);
 
 for (let env of envs) {
     cmds.push(`compile ${env}`);

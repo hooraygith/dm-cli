@@ -1,4 +1,7 @@
 const shell = require('shelljs');
+const ora = require('ora');
+
+let spinner = ora();
 
 module.exports = {
     exec(cmds) {
@@ -6,10 +9,12 @@ module.exports = {
         for (let cmd of cmds) {
             stack = ((next, cmd) => {
                 return () => {
+                    spinner.start(cmd);
                     shell.exec(cmd, {
                         async: true
                     }, (code, stdout, stderr) => {
                         if (!stderr) {
+                            spinner.succeed(`end ok!!! ${cmd}`)
                             next();
                         }
                     });
