@@ -12,7 +12,8 @@ module.exports = {
   },
   exec (cmd, opt) {
     let rs = shell.exec(cmd, opt)
-    if (rs.code) {
+    if (rs.stderr.toLowerCase().indexOf('error') > -1) {
+      console.log(rs)
       process.exit(1)
     } else {
       return rs.stdout
