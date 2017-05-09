@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 const shell = require('shelljs')
-const config = require('./config/index.js')
-const chalk = require('chalk')
+const cmd = require('./util/cmd.js');
 const program = require('commander')
+const _DIR = process.cwd()
 
 let tag = ''
 
@@ -16,8 +16,8 @@ program
 
 if (!tag) {
   // 检测是否输入tag
-  console.log(chalk.red('Pleae enter tag value! tag push [tag]'))
+  cmd.error('Pleae enter tag value! tag push [tag]')
   process.exit(1)
 }
 
-shell.exec(`git push origin ${tag}`)
+cmd.exec(`git push origin ${tag}`)

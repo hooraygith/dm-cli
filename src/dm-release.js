@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 const shell = require('shelljs')
-const config = require('./config/index.js')
-const chalk = require('chalk')
+const cmd = require('./util/cmd.js');
 const program = require('commander')
-const package = require(process.cwd() + '/package.json')
+const _DIR = process.cwd()
+const package = require(_DIR + '/package.json')
 
 
-shell.exec('git add -A')
-shell.exec(`git commit -m ${package.version} --no-verify`)
-shell.exec(`git tag v${package.version}`)
-shell.exec(`git push origin v${package.version}`)
+cmd.exec('git add -A')
+cmd.exec(`git commit -m ${package.version} --no-verify`)
+cmd.exec(`git tag v${package.version}`)
+cmd.exec(`git push origin v${package.version}`)
 
-let branch = shell.exec('git symbolic-ref --short -q HEAD',{silent:true}).stdout
-shell.exec(`git push origin ${branch}`)
+let branch = cmd.exec('git symbolic-ref --short -q HEAD')
+cmd.exec(`git push origin ${branch}`)

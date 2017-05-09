@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 const shell = require('shelljs')
-const config = require('./config/index.js')
-const chalk = require('chalk')
+const cmd = require('./util/cmd.js');
 const program = require('commander')
 const _DIR = process.cwd()
 
@@ -11,9 +10,9 @@ program
     .parse(process.argv)
 
 if (shell.test('-f', `${_DIR}/src`)) { // 当没有src目录时 vuefix会报错，加个判断修复
-    shell.exec('vuefix -d src')
+    cmd.exec('vuefix -d src')
 
     if(program.commit){
-        shell.exec('git add -A')
+        cmd.exec('git add -A')
     }
 }
