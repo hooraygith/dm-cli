@@ -12,7 +12,7 @@ module.exports = {
   },
   exec (cmd, opt) {
     let rs = shell.exec(cmd, opt)
-    if (rs.stderr.toLowerCase().indexOf('error') > -1) {
+    if (rs.code !== 0) {
       console.log(rs)
       process.exit(1)
     } else {
