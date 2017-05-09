@@ -6,12 +6,13 @@ const chalk = require('chalk')
 const program = require('commander')
 
 let type = ''
-let cmds = []
+let envs = [];
 
 program
-    .arguments('[newVersion]')
-    .action(val => {
-      type = val
+    .arguments('[newVersion] [envs...]')
+    .action((val, val2) => {
+        type = val
+        envs = val2.length ? val2 : ['dev', 'pd']
     })
     .parse(process.argv)
 
@@ -19,5 +20,5 @@ shell.exec('dm update')
 shell.exec('dm lint')
 shell.exec('dm tag fetch')
 shell.exec('npm --no-git-tag-version version ' + type)
-shell.exec(`dm build dev pd`)
+shell.exec(`dm build ${envs.join(' ')}`)
 shell.exec('dm release')
