@@ -8,7 +8,7 @@ const program = require('commander')
 program
   .command('start', '启动服务')
   .command('publish', '发布')
-  .command('tag', '')
+  .command('release', 'rc')
   .command('lint', '格式检查')
   .command('build', '编译')
   .command('update', '更新依赖')
