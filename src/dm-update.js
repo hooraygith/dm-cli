@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-const config = require('./config/index.js')
 const shell = require('shelljs')
 const cmd = require('./util/cmd.js')
 const program = require('commander')
 const _DIR = process.cwd()
+
+const ora = require('ora')
+const config = require('./config/index.js')
 
 let command1 = `npm outdated --json --registry=${config.registry}\n` // 检查需要更新的包
 let command2 = `npm i ` // 更新包
