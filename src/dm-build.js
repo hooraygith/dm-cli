@@ -20,7 +20,7 @@ if (!shell.test('-f', `${_DIR}/build/webpack.config.${program.env}.js`)) {
 
 console.log(chalk.yellow('============compile============'))
 
-//compile前置钩子
+// compile前置钩子
 if (shell.test('-f', `${_DIR}/build/build-pre.js`)) {
   shell.exec(`node ${_DIR}/build/build-pre.js`)
 }

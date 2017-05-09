@@ -4,10 +4,10 @@ const ora = require('ora')
 let spinner = ora()
 
 module.exports = {
-  exec(cmds) {
+  exec (cmds) {
     let stack = () => {}
     for (let cmd of cmds) {
-      stack = (function(next, cmd) {
+      stack = (function (next, cmd) {
         return () => {
           spinner.start(cmd)
           shell.exec(

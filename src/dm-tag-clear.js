@@ -16,13 +16,13 @@ program
   .parse(process.argv)
 
 if (program.all) {
-  //删除本地全部tag
+  // 删除本地全部tag
   shell.exec('git tag -l | xargs git tag -d')
   process.exit(0)
 }
 
 if (!regexp) {
-  //检测是否输入patterns
+  // 检测是否输入patterns
   console.log(chalk.yellow('Please enter regexp! tag clear [regexp]'))
   process.exit(1)
 }

@@ -1,31 +1,30 @@
 #!/usr/bin/env node
 
-const batch = require('./util/batch.js');
-const shell = require('shelljs');
-const config = require('./config/index.js');
-const chalk = require('chalk');
-const program = require('commander');
+const batch = require('./util/batch.js')
+const shell = require('shelljs')
+const config = require('./config/index.js')
+const chalk = require('chalk')
+const program = require('commander')
 
-let type = '';
-let envs = ['dev', 'pd'];
-let cmds = ['update', 'lint', 'tag fetch'];
+let type = ''
+let cmds = []
 
 program
-  .arguments('[newVersion]')
-  .action(val => {
-    type = val;
-  })
-  .parse(process.argv);
+    .arguments('[newVersion]')
+    .action(val => {
+      type = val
+    })
+    .parse(process.argv)
 
-//todo 用semver升级版本号；semver.inc(type)
-cmds.push('npm --no-git-tag-version version ' + type);
+cmds.push('dm update')
+cmds.push('dm lint')
+cmds.push('dm tag fetch')
+// todo 用semver升级版本号；semver.inc(type)
+cmds.push('npm --no-git-tag-version version ' + type)
+cmds.push(`compile dev`)
+cmds.push(`compile pd`)
+cmds.push('git add -A')
+// todo commit and new tag
+// todo push
 
-for (let env of envs) {
-  cmds.push(`compile ${env}`);
-}
-
-cmds.push('git add -A');
-//todo 新建tag
-//todo 提交tag和分支代码
-
-batch.exec(cmds);
+batch.exec(cmds)

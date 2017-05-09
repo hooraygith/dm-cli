@@ -5,12 +5,12 @@ const config = require('./config/index.js')
 const chalk = require('chalk')
 const ora = require('ora')
 
-let command1 = `npm outdated --json --registry=${config.registry}\n` //检查需要更新的包
-let command2 = `npm i ` //更新包
-let spinner = ora(command1).start() //加载动画
+let command1 = `npm outdated --json --registry=${config.registry}\n` // 检查需要更新的包
+let command2 = `npm i ` // 更新包
+let spinner = ora(command1).start() // 加载动画
 
 let updateRs = shell.exec(`npm outdated --json --registry=${config.registry}`, {
-  silent: true,
+  silent: true
 }).stdout
 
 if (!updateRs) {
@@ -24,7 +24,7 @@ let updatePkg = []
 for (let i in updateJson) {
   let version = updateJson[i].wanted
   if (version == updateJson[i].current) {
-    //is update to date
+    // is update to date
   } else if (version == 'git') {
     updatePkg.push(i)
   } else {
