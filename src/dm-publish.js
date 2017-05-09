@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const batch = require('./util/batch.js')
 const shell = require('shelljs')
 const config = require('./config/index.js')
 const chalk = require('chalk')
@@ -16,15 +15,12 @@ program
     })
     .parse(process.argv)
 
-cmds.push('dm update')
-cmds.push('dm lint')
-cmds.push('dm tag fetch')
-// todo 用semver升级版本号；semver.inc(type)
-cmds.push('npm --no-git-tag-version version ' + type)
-cmds.push(`compile dev`)
-cmds.push(`compile pd`)
-cmds.push('git add -A')
-// todo commit and new tag
-// todo push
+shell.exec('dm update')
+shell.exec('dm lint')
+shell.exec('dm tag fetch')
+shell.exec('npm --no-git-tag-version version ' + type)
+shell.exec(`dm build dev`)
+shell.exec(`dm build pd`)
+shell.exec('dm release')
 
 batch.exec(cmds)
