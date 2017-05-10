@@ -15,12 +15,10 @@ const eslintfixer = (input) => {
       fix: true
     })
     report = cliEngine.executeOnText(input)
-            // 如果没有错误, reports，不包含 output,此时原样输出
-    output = report.results[0].output || input
+    output = report.results[0].output || input // 如果没有错误, reports，不包含 output,此时原样输出
     return output
   } catch (err) {
-        // Missing `eslint`, `.eslintrc`
-    process.stderr.write(err)
+    process.stderr.write(err) // Missing `eslint`, `.eslintrc`
     process.exit(1)
   }
   return input
@@ -44,7 +42,7 @@ const vuefix = (files) => {
       }
       fs.writeFileSync(filePath, parser.serialize(fragment))
     }
-    console.log(`${filePath} has fixed`)
+    console.log(`${filePath} has formated`)
   })
 }
 

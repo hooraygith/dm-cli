@@ -23,10 +23,7 @@ if (!shell.test('-f', `${_DIR}/build/webpack.config.${env}.js`)) {
 }
 
 const webpack = require('webpack')
-const webpackConfig = require(_DIR +
-    '/build/webpack.config.' +
-    env +
-    '.js')
+const webpackConfig = require(`${_DIR}/build/webpack.config.${env}.js`)
 
 // returns a Compiler instance
 const compiler = webpack(webpackConfig)
