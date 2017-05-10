@@ -1,5 +1,4 @@
 const shell = require('shelljs')
-const config = require('../src/config/index.js')
 
 const dep = [
   'eslint@3.19.0',
@@ -11,4 +10,4 @@ const dep = [
   'eslint-plugin-html@1.7.0'
 ]
 
-shell.exec(`dm install --registry=${config.registry} ${dep.join(' ')} -g`)
+shell.exec(`dm install -g ${dep.join(' ')}`)

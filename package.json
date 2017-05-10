@@ -8,7 +8,7 @@
     "dm": "src/dm.js"
   },
   "scripts": {
-    "build": "node scripts/install.js",
+    "install": "node scripts/install.js",
     "postversion": "git push --tags",
     "update": "node src/dm-update.js",
     "lint": "node src/dm-lint.js",
