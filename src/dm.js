@@ -4,7 +4,7 @@ const program = require('commander')
 
 program
   .version(require('../package.json').version)
-  .command('init', '初始化项目')
+  .command('install', '安装依赖')
   .command('update', '更新依赖')
   .command('lint', '格式化&&eslint')
   .command('tag', 'tag处理')

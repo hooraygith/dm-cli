@@ -26,7 +26,7 @@ const eslintfixer = (input) => {
 
 const vuefix = (files) => {
   const vuefiles = files.filter(f => f.match(/\.(vue|js)$/gi))
-  cmd.exec(`eslint ${vuefiles.join(' ')}`)
+
   vuefiles.forEach((filePath) => {
     const fileContent = fs.readFileSync(filePath, 'utf-8')
 
@@ -45,6 +45,8 @@ const vuefix = (files) => {
     }
     console.log(`${filePath} has formated`)
   })
+
+  cmd.exec(`eslint ${vuefiles.join(' ')}`)
 }
 
 module.exports = module.exports.default = vuefix
