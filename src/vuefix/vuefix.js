@@ -1,4 +1,5 @@
 // const shell = require('shelljs')
+const cmd = require('../util/cmd.js')
 const parser = require('parse5')
 const eslint = require('eslint')
 const fs = require('fs')
@@ -25,6 +26,7 @@ const eslintfixer = (input) => {
 
 const vuefix = (files) => {
   const vuefiles = files.filter(f => f.match(/\.(vue|js)$/gi))
+  cmd.exec(`eslint ${vuefiles.join(' ')}`)
   vuefiles.forEach((filePath) => {
     const fileContent = fs.readFileSync(filePath, 'utf-8')
 

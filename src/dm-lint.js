@@ -16,7 +16,6 @@ program.source = program.source || 'src' // npm run script 会忽略 -param 传�
 
 if (program.commit) {
   let files = shell.exec('git diff --cached --name-only --diff-filter=ACM', {silent: true}).stdout.split('\n')
-  cmd.exec(`eslint ${files.join(' ')}`)
   vuefix(files)
   cmd.exec('git add -A')
 } else {
@@ -26,7 +25,6 @@ if (program.commit) {
         console.log(err)
         process.exit(1)
       }
-      cmd.exec('eslint --ext .js,.vue src')
       vuefix(files)
     })
   }
