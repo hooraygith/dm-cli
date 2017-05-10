@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const shell = require('shelljs')
+// const shell = require('shelljs')
 const cmd = require('./util/cmd.js')
 const program = require('commander')
-const _DIR = process.cwd()
+// const _DIR = process.cwd()
 
 let type = ''
 let envs = []
@@ -19,6 +19,14 @@ program
 cmd.exec('dm update')
 cmd.exec('dm lint')
 cmd.exec('dm tag fetch')
-cmd.exec('npm --no-git-tag-version version ' + type)
+
+let version = cmd.exec(`npm --no-git-tag-version version ${type}`)
 cmd.exec(`dm build ${envs.join(' ')}`)
-cmd.exec('dm push')
+
+cmd.exec('git add -A')
+cmd.exec(`git commit -m ${version.replace('v', '')} --no-verify`)
+cmd.exec(`git tag ${version}`)
+cmd.exec(`git push origin ${version}`)
+
+let branch = cmd.exec('git symbolic-ref --short -q HEAD')
+cmd.exec(`git push origin ${branch}`)

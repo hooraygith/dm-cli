@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const shell = require('shelljs')
-const cmd = require('./util/cmd.js')
+// const shell = require('shelljs')
+// const cmd = require('./util/cmd.js')
 const program = require('commander')
-const _DIR = process.cwd()
+// const _DIR = process.cwd()
 
 program
   .command('clear', '删除tag')

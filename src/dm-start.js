@@ -22,16 +22,16 @@ if (!shell.test('-f', `${_DIR}/build/webpack.config.${env}.js`)) {
   cmd.error(`找不到文件：${_DIR}/build/webpack.config.${env}.js`)
 }
 
-const webpackDevServer = require('webpack-dev-server')
-const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const Webpack = require('webpack')
 const webpackConfig = require(`${_DIR}/build/webpack.config.${env}.js`)
 const serverConfig = require(`${_DIR}/build/server.config.json`)
 
 webpackConfig.entry.index.unshift(`webpack-dev-server/client?http://${serverConfig.host}/`, 'webpack/hot/dev-server')
-webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+webpackConfig.plugins.push(new Webpack.HotModuleReplacementPlugin())
 webpackConfig.output.filename = '[name].[hash].js'
 
-let server = new webpackDevServer(webpack(webpackConfig), {
+let server = new WebpackDevServer(Webpack(webpackConfig), {
     // hot: true,
   watchOptions: {
     aggregateTimeout: 300,

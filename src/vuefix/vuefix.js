@@ -1,8 +1,7 @@
-const shell = require('shelljs')
+// const shell = require('shelljs')
 const parser = require('parse5')
 const eslint = require('eslint')
 const fs = require('fs')
-const debug = require('debug')('vuefix')
 
 const eslintfixer = (input) => {
   let CLIEngine
@@ -18,10 +17,10 @@ const eslintfixer = (input) => {
     output = report.results[0].output || input // 如果没有错误, reports，不包含 output,此时原样输出
     return output
   } catch (err) {
-    process.stderr.write(err) // Missing `eslint`, `.eslintrc`
+    console.log(err)
+    // process.stderr.write(err) // Missing `eslint`, `.eslintrc`
     process.exit(1)
   }
-  return input
 }
 
 const vuefix = (files) => {

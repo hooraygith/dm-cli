@@ -36,7 +36,7 @@ const handleSoftErrors = function (error) {
   process.exit(1)
 }
 const handleWarnings = function (error) {
-    // console.log(error)
+  console.log(error)
     // process.exit(1)
 }
 
