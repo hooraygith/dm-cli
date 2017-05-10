@@ -1,5 +1,4 @@
 const shell = require('shelljs')
-const ora = require('ora')
 
 const dep = [
   'eslint@3.19.0',
@@ -12,6 +11,5 @@ const dep = [
 ]
 
 let command = `dm install -g ${dep.join(' ')}`
-let spinner = ora(command).start()
+console.log(command)
 shell.exec(command)
-spinner.succeed('Already up-to-date!')
