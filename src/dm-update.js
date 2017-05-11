@@ -31,7 +31,7 @@ for (let i in updateJson) {
 
 // 获取依赖中以git+ssh方式引入的包
 let gitSSH = []
-let rs = JSON.parse(cmd.exec('npm list -g --depth=0 --json', {
+let rs = JSON.parse(cmd.exec('npm list --depth=0 --json', {
   silent: true
 })).dependencies
 for (let i in rs) {
