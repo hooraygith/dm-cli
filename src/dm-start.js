@@ -10,9 +10,11 @@ let env = ''
 program
     .arguments('[env]')
     .action(val => {
-      env = val || 'dev-server'
+      env = val
     })
     .parse(process.argv)
+
+env = env || 'dev-server'
 
 if (!shell.test('-f', `${_DIR}/build/webpack.config.${env}.js`)) {
   cmd.error(`找不到文件：${_DIR}/build/webpack.config.${env}.js`)
