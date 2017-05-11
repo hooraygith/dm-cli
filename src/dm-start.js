@@ -10,17 +10,15 @@ let env = ''
 program
     .arguments('[env]')
     .action(val => {
-      env = val
+      env = val || 'dev-server'
     })
     .parse(process.argv)
-
-if (!env) {
-  cmd.error('请输入运行的环境变量 dm start [环境名]')
-}
 
 if (!shell.test('-f', `${_DIR}/build/webpack.config.${env}.js`)) {
   cmd.error(`找不到文件：${_DIR}/build/webpack.config.${env}.js`)
 }
+
+cmd.exec(`dm compile-pre ${env}`)
 
 const WebpackDevServer = require('webpack-dev-server')
 const Webpack = require('webpack')
