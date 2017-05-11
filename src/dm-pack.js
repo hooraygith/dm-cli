@@ -24,7 +24,7 @@ let version = cmd.exec(`npm --no-git-tag-version version ${type}`)
 cmd.exec(`dm build ${envs.join(' ')}`)
 
 cmd.exec('git add -A')
-cmd.exec(`git commit -m ${version.replace('v', '')} --no-verify`)
+cmd.exec(`git commit -m '${version.replace('v', '')}' -n`)
 cmd.exec(`git tag ${version}`)
 cmd.exec(`git push origin ${version}`)
 
