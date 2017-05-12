@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const shell = require('shelljs')
 
