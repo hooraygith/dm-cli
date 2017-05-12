@@ -1,6 +1,6 @@
 {
   "name": "dm-cli",
-  "version": "0.1.14-2",
+  "version": "0.1.14-0",
   "description": "点米.前端.CLI工具",
   "author": "otherlite@gmail.com",
   "license": "MIT",
@@ -9,15 +9,14 @@
   },
   "scripts": {
     "install": "node scripts/install.js",
-    "postversion": "git push --tags"
+    "postversion": "git push --tags",
+    "precommit": "node src/dm-lint.js --commit"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/DianmiFE/dm-cli"
   },
   "dependencies": {
-    "stylelint": "7.10.1",
-    "eslint": "3.19.0",
     "chalk": "1.1.3",
     "ora": "1.2.0",
     "commander": "2.9.0",
