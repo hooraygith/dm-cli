@@ -1,31 +1,14 @@
+#!/usr/bin/env node
+
 // const shell = require('shelljs')
 const cmd = require('../util/cmd.js')
 const parser = require('parse5')
-const eslint = require('eslint')
+const eslintfixer = require('./eslintfixer.js')
+const stylelintfixer = require('./stylelintfixer.js')
 const fs = require('fs')
 
-const eslintfixer = (input) => {
-  let CLIEngine
-  let cliEngine
-  let report
-  let output
-  try {
-    CLIEngine = eslint.CLIEngine
-    cliEngine = new CLIEngine({
-      fix: true
-    })
-    report = cliEngine.executeOnText(input)
-    output = report.results[0].output || input // 如果没有错误, reports，不包含 output,此时原样输出
-    return output
-  } catch (err) {
-    console.log(err)
-    // process.stderr.write(err) // Missing `eslint`, `.eslintrc`
-    process.exit(1)
-  }
-}
-
-const vuefix = (files) => {
-  const vuefiles = files.filter(f => f.match(/\.(vue|js)$/gi))
+module.exports = module.exports.default = function (files) {
+  const vuefiles = files.filter(f => f.match(/\.(vue|js|scss)$/gi))
 
   vuefiles.forEach((filePath) => {
     const fileContent = fs.readFileSync(filePath, 'utf-8')
@@ -39,14 +22,24 @@ const vuefix = (files) => {
         if (node.nodeName === 'script') {
           const scriptString = parser.serialize(node)
           node.childNodes[0].value = eslintfixer(scriptString)
+          fs.writeFileSync(filePath, parser.serialize(fragment))
+        } else if (node.nodeName === 'style') {
+          const styleString = parser.serialize(node)
+
+          stylelintfixer(styleString).then((data) => {
+            if (data.errored) {
+              console.log(data.output)
+              process.exit(1)
+            } else {
+              node.childNodes[0].value = data.results
+              fs.writeFileSync(filePath, parser.serialize(fragment))
+            }
+          })
         }
       }
-      fs.writeFileSync(filePath, parser.serialize(fragment))
     }
     console.log(`${filePath} has formated`)
   })
 
   cmd.exec(`eslint ${vuefiles.join(' ')}`)
 }
-
-module.exports = module.exports.default = vuefix
