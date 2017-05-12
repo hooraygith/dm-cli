@@ -16,6 +16,7 @@
     "url": "https://github.com/DianmiFE/dm-cli"
   },
   "dependencies": {
+    "stylelint": "7.10.1",
     "eslint": "3.19.0",
     "chalk": "1.1.3",
     "ora": "1.2.0",
