@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://gitlab-test.dianmi365.com:81/zengyuwen/Dianmi.FE.CLI"
+    "url": "https://github.com/DianmiFE/dm-cli"
   },
   "dependencies": {
     "chalk": "1.1.3",
