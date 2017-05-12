@@ -20,7 +20,7 @@ let rs = JSON.parse(shell.exec('npm list -g --depth=0 --json', {
 }).stdout)
 
 for (let i in dep) {
-  if (dep[i] !== rs.dependencies[i].version) {
+  if (rs.dependencies && dep[i] !== rs.dependencies[i].version) {
     install.push(`${i}@${dep[i]}`)
   }
 }
