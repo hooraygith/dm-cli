@@ -31,7 +31,7 @@ module.exports = module.exports.default = function (files) {
               console.log(data.output)
               process.exit(1)
             } else {
-              node.childNodes[0].value = '\n' + result.css
+              node.childNodes[0].value = '\n' + data.css
               fs.writeFileSync(filePath, parser.serialize(fragment))
             }
           })
