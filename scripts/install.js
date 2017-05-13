@@ -1,12 +1,6 @@
 const shell = require('shelljs')
 
 const dep = {
-    'stylefmt':'5.3.2',
-    'stylelint': '7.10.1',
-    'stylelint-scss': '1.4.4',
-    'postcss':'6.0.1',
-    'postcss-scss':'1.0.0',
-    'stylelint-processor-html':'1.0.0',
     'eslint': '3.19.0',
     'eslint-config-dianmife': '0.1.4',
     'eslint-config-standard': '10.2.1',
