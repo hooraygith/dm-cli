@@ -15,7 +15,16 @@ module.exports = module.exports.default = function (files) {
 
     if (filePath.match(/\.js/i)) {
       fs.writeFileSync(filePath, eslintfixer(fileContent))
-    } else if (filePath.match(/\.vue/i)) {
+    } else if(){
+      stylelintfixer(fileContent).then((data) => {
+        if (data.errored) {
+          console.log(data.output)
+          process.exit(1)
+        } else {
+          fs.writeFileSync(filePath, data.css)
+        }
+      })
+    }else if (filePath.match(/\.vue/i)) {
       const fragment = parser.parseFragment(fileContent)
       const childNodes = fragment.childNodes
       for (let node of childNodes) {
