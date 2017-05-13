@@ -15,7 +15,7 @@ module.exports = module.exports.default = function (files) {
 
     if (filePath.match(/\.js/i)) {
       fs.writeFileSync(filePath, eslintfixer(fileContent))
-    } else if(){
+    } else if(filePath.match(/\.scss/i){
       stylelintfixer(fileContent).then((data) => {
         if (data.errored) {
           console.log(data.output)
