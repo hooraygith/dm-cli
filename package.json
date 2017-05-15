@@ -9,7 +9,8 @@
   },
   "scripts": {
     "install": "node scripts/install.js",
-    "postversion": "git push --tags"
+    "postversion": "git push --tags",
+    "precommit": "dm lint --commit"
   },
   "repository": {
     "type": "git",
