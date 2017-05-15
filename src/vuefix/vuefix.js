@@ -53,17 +53,15 @@ module.exports = module.exports.default = function(files) {
 
             let styleString = parser.serialize(processQueue.style)
             stylelintfixer(styleString).then((rs) => {
-                processQueue.style.childNodes[0].value = '\n'+rs.css
+                processQueue.style.childNodes[0].value = ((rs.css.indexOf('\n') === 0) ? '' : '\n') + rs.css
 
-                fs.writeFileSync(filePath, parser.serialize(fragment))
-                console.log(`${filePath} has formated`)
-                resolve(true)
+                fs.writeFileSync(filePath, parser.serialize(fragment)) console.log(`${filePath} has formated`) resolve(true)
             })
         })
     }))
 
 
-    Promise.all(jsPromise.concat(vuePromise,scssPromise)).then(() => {
+    Promise.all(jsPromise.concat(vuePromise, scssPromise)).then(() => {
         cmd.log('============ format end ============')
         cmd.log('============ lint start ============')
         cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
