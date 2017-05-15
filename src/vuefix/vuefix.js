@@ -37,7 +37,7 @@ module.exports = module.exports.default = function(files) {
             let fileContent = fs.readFileSync(filePath, 'utf-8')
             let fragment = parser.parseFragment(fileContent)
             let childNodes = fragment.childNodes
-            let processQueue＝ {};
+            let processQueue = {};
             for (let node of childNodes) {
                 if (node.nodeName === 'script') {
                     processQueue.script = node;
