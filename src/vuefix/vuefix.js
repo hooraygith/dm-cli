@@ -40,24 +40,31 @@ module.exports = module.exports.default = function (files) {
       let fragment = parser.parseFragment(fileContent)
       let childNodes = fragment.childNodes
       let processQueue = {}
+
       for (let node of childNodes) {
         if (node.nodeName === 'script') {
+          node.attrs = []
           processQueue.script = node
         } else if (node.nodeName === 'style') {
+          node.attrs = []
           processQueue.style = node
         }
       }
 
-      let scriptString = parser.serialize(processQueue.script)
-      processQueue.script.childNodes[0].value = eslintfixer(scriptString)
+      if (processQueue.script) {
+        let scriptString = parser.serialize(processQueue.script)
+        processQueue.script.childNodes[0].value = eslintfixer(scriptString)
+      }
 
-      let styleString = parser.serialize(processQueue.style)
-      stylelintfixer(styleString).then((rs) => {
-        processQueue.style.childNodes[0].value = ((rs.css.indexOf('\n') === 0) ? '' : '\n') + rs.css
-        fs.writeFileSync(filePath, parser.serialize(fragment))
-        console.log(`${filePath} has formated`)
-        resolve(true)
-      })
+      if (processQueue.style) {
+        let styleString = parser.serialize(processQueue.style) || '\n'
+        stylelintfixer(styleString).then((rs) => {
+          processQueue.style.childNodes[0].value = ((rs.css.indexOf('\n') === 0) ? '' : '\n') + rs.css
+          fs.writeFileSync(filePath, parser.serialize(fragment))
+          console.log(`${filePath} has formated`)
+          resolve(true)
+        })
+      }
     })
   }))
 
@@ -66,10 +73,10 @@ module.exports = module.exports.default = function (files) {
     cmd.log('============ lint start ============')
 
     let eslintFiles = jsfiles.concat(vuefiles)
-        // let stylelintFiles = scssfiles.concat(vuefiles)
+            // let stylelintFiles = scssfiles.concat(vuefiles)
 
     eslintFiles.length && cmd.exec(`eslint ${eslintFiles.join(' ')}`)
-        // stylelintFiles.length && cmd.exec(`stylelint ${stylelintFiles.join(' ')}`)
+            // stylelintFiles.length && cmd.exec(`stylelint ${stylelintFiles.join(' ')}`)
 
     cmd.log('lint end')
   })
