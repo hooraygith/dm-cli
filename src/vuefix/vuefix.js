@@ -12,6 +12,8 @@ module.exports = module.exports.default = function(files) {
     let vuefiles = files.filter(f => f.match(/\.(vue)$/gi))
     let scssfiles = files.filter(f => f.match(/\.(scss)$/gi))
 
+    cmd.log('============ format start ============')
+
     let jsPromise = jsfiles.map(filePath => new Promise((resolve, reject) => {
         setTimeout(() => {
             const fileContent = fs.readFileSync(filePath, 'utf-8')
@@ -51,7 +53,7 @@ module.exports = module.exports.default = function(files) {
 
             let styleString = parser.serialize(processQueue.style)
             stylelintfixer(styleString).then((rs) => {
-                processQueue.style.childNodes[0].value = rs.css
+                processQueue.style.childNodes[0].value = '\n'+rs.css
 
                 fs.writeFileSync(filePath, parser.serialize(fragment))
                 console.log(`${filePath} has formated`)
@@ -60,7 +62,11 @@ module.exports = module.exports.default = function(files) {
         })
     }))
 
-    Promise.all(Promise.all(jsPromise), Promise.all(vuePromise)).then(() => {
+
+    Promise.all(jsPromise.concat(vuePromise,scssPromise)).then(() => {
+        cmd.log('============ format end ============')
+        cmd.log('============ lint start ============')
         cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
+        cmd.log('lint end')
     })
 }
