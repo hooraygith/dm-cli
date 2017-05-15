@@ -1,6 +1,6 @@
 {
   "name": "dm-cli",
-  "version": "0.1.15-2",
+  "version": "0.1.15-3",
   "description": "点米.前端.CLI工具",
   "author": "otherlite@gmail.com",
   "license": "MIT",
@@ -22,9 +22,9 @@
     "shelljs": "0.7.7",
     "recursive-readdir": "2.1.0",
     "parse5": "^3.0.1",
-    "postcss":"6.0.1",
-    "postcss-scss":"1.0.0",
-    "stylefmt":"5.3.2"
+    "postcss": "6.0.1",
+    "postcss-scss": "1.0.0",
+    "stylefmt": "5.3.2"
   },
   "devDependencies": {
     "husky": "0.13.3"
