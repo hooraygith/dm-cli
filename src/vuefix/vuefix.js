@@ -56,14 +56,16 @@ module.exports = module.exports.default = function (files) {
         processQueue.script.childNodes[0].value = eslintfixer(scriptString)
       }
 
-      if (processQueue.style) {
-        let styleString = parser.serialize(processQueue.style) || '\n'
+      if (processQueue.style && processQueue.style.childNodes.length) {
+        let styleString = parser.serialize(processQueue.style)
         stylelintfixer(styleString).then((rs) => {
           processQueue.style.childNodes[0].value = ((rs.css.indexOf('\n') === 0) ? '' : '\n') + rs.css
           fs.writeFileSync(filePath, parser.serialize(fragment))
           console.log(`${filePath} has formated`)
           resolve(true)
         })
+      } else {
+        resolve(true)
       }
     })
   }))
