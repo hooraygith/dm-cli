@@ -4,7 +4,7 @@
 const cmd = require('../util/cmd.js')
 const parser = require('parse5')
 const eslintfixer = require('./eslintfixer.js')
-const stylelintfixer = require('./stylelintfixer.js')
+// const stylelintfixer = require('./stylelintfixer.js')
 const fs = require('fs')
 
 module.exports = module.exports.default = function(files) {
@@ -66,7 +66,7 @@ module.exports = module.exports.default = function(files) {
         cmd.log('============ format end ============')
         cmd.log('============ lint start ============')
         cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
-        cmd.exec(`stylelint ${scssfiles.concat(vuefiles).join(' ')}`)
+        // cmd.exec(`stylelint ${scssfiles.concat(vuefiles).join(' ')}`)
         cmd.log('lint end')
     })
 }
