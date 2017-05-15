@@ -71,7 +71,6 @@ module.exports = module.exports.default = function (files) {
   }))
 
   Promise.all(jsPromise.concat(vuePromise, scssPromise)).then(() => {
-    cmd.log('============ format end ============')
     cmd.log('============ lint start ============')
 
     let eslintFiles = jsfiles.concat(vuefiles)
@@ -79,7 +78,5 @@ module.exports = module.exports.default = function (files) {
 
     eslintFiles.length && cmd.exec(`eslint ${eslintFiles.join(' ')}`)
             // stylelintFiles.length && cmd.exec(`stylelint ${stylelintFiles.join(' ')}`)
-
-    cmd.log('lint end')
   })
 }
