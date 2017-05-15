@@ -67,6 +67,7 @@ module.exports = module.exports.default = function(files) {
         cmd.log('============ format end ============')
         cmd.log('============ lint start ============')
         cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
+        cmd.exec(`stylelint ${scssfiles.concat(vuefiles).join(' ')}`)
         cmd.log('lint end')
     })
 }
