@@ -4,31 +4,63 @@
 const cmd = require('../util/cmd.js')
 const parser = require('parse5')
 const eslintfixer = require('./eslintfixer.js')
+const stylelintfixer = require('./stylelintfixer.js')
 const fs = require('fs')
 
 module.exports = module.exports.default = function(files) {
-    const jsfiles = files.filter(f => f.match(/\.(js)$/gi))
-    const vuefiles = files.filter(f => f.match(/\.(vue)$/gi))
+    let jsfiles = files.filter(f => f.match(/\.(js)$/gi))
+    let vuefiles = files.filter(f => f.match(/\.(vue)$/gi))
+    let scssfiles = files.filter(f => f.match(/\.(scss)$/gi))
 
-    jsfiles.forEach((filePath) => {
-        const fileContent = fs.readFileSync(filePath, 'utf-8')
-        fs.writeFileSync(filePath, eslintfixer(fileContent))
-        console.log(`${filePath} has formated`)
-    })
+    let jsPromise = jsfiles.map(filePath => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const fileContent = fs.readFileSync(filePath, 'utf-8')
+            fs.writeFileSync(filePath, eslintfixer(fileContent))
+            console.log(`${filePath} has formated`)
+            resolve(true)
+        })
+    }))
 
-    vuefiles.forEach((filePath) => {
-        const fileContent = fs.readFileSync(filePath, 'utf-8')
-        const fragment = parser.parseFragment(fileContent)
-        const childNodes = fragment.childNodes
-        for (let node of childNodes) {
-            if (node.nodeName === 'script') {
-                const scriptString = parser.serialize(node)
-                node.childNodes[0].value = eslintfixer(scriptString)
+    let scssPromise = scssfiles.map(filePath => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const fileContent = fs.readFileSync(filePath, 'utf-8')
+            stylelintfixer(fileContent).then((rs) => {
+                fs.writeFileSync(filePath, rs.css)
+                console.log(`${filePath} has formated`)
+                resolve(true)
+            })
+        })
+    }))
+
+    let vuePromise = vuefiles.map(filePath => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let fileContent = fs.readFileSync(filePath, 'utf-8')
+            let fragment = parser.parseFragment(fileContent)
+            let childNodes = fragment.childNodes
+            let processQueue＝ {};
+            for (let node of childNodes) {
+                if (node.nodeName === 'script') {
+                    processQueue.script = node;
+                } else if (node.nodeName === 'style') {
+                    processQueue.style = node;
+                }
+            }
+
+            let scriptString = parser.serialize(processQueue.script)
+            processQueue.script.childNodes[0].value = eslintfixer(scriptString)
+
+            let styleString = parser.serialize(processQueue.style)
+            stylelintfixer(styleString).then((rs) => {
+                processQueue.style.childNodes[0].value = rs.css
+
                 fs.writeFileSync(filePath, parser.serialize(fragment))
                 console.log(`${filePath} has formated`)
-            }
-        }
-    })
+                resolve(true)
+            })
+        })
+    }))
 
-    cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
+    Promise.all(Promise.all(jsPromise), Promise.all(vuePromise)).then(() => {
+        cmd.exec(`eslint ${jsfiles.join(' ')} ${vuefiles.join(' ')}`)
+    })
 }
