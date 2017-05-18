@@ -40,7 +40,8 @@ let server = new WebpackDevServer(Webpack(webpackConfig), {
   stats: {
     chunks: false, // Makes the build much quieter
     colors: true
-  }
+  },
+  historyApiFallback: true
 })
 server.listen(serverConfig.port, 'localhost', () => {
   console.log(`正  在  编  译  中  ...  片  刻  后  可  访  问  http://${serverConfig.host}/index.html`)
