@@ -46,7 +46,17 @@ module.exports = module.exports.default = function (files) {
           node.attrs = []
           processQueue.script = node
         } else if (node.nodeName === 'style') {
-          node.attrs = []
+          const attrs = []
+
+          for (let item of node.attrs) {
+            if (item.name === 'scoped') {
+              attrs.push({name: 'scoped', value: ''})
+            } else if (item.name === 'src') {
+              attrs.push({name: 'src', value: item.value})
+            }
+          }
+
+          node.attrs = attrs
           processQueue.style = node
         }
       }
