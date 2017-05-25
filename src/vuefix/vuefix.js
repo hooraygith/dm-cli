@@ -84,9 +84,9 @@ module.exports = module.exports.default = function (files) {
     cmd.log('============ lint start ============')
 
     let eslintFiles = jsfiles.concat(vuefiles)
-            // let stylelintFiles = scssfiles.concat(vuefiles)
+    let stylelintFiles = scssfiles.concat(vuefiles)
 
     eslintFiles.length && cmd.exec(`eslint ${eslintFiles.join(' ')}`)
-            // stylelintFiles.length && cmd.exec(`stylelint ${stylelintFiles.join(' ')}`)
+    stylelintFiles.length && cmd.exec(`stylelint ${stylelintFiles.join(' ')} --syntax scss`)
   })
 }
