@@ -15,19 +15,18 @@ module.exports = {
     'block-closing-brace-newline-after': 'always',
     'block-closing-brace-newline-before': 'always-multi-line',
     'block-closing-brace-space-before': 'always-single-line',
-    'block-no-empty': true,
     'block-opening-brace-newline-after': 'always-multi-line',
     'block-opening-brace-space-after': 'always-single-line',
     'block-opening-brace-space-before': 'always',
     'color-hex-case': 'lower',
     'color-hex-length': 'short',
     'color-no-invalid-hex': true,
-    'comment-empty-line-before': ['always', {
-      except: ['first-nested'],
-      ignore: ['stylelint-commands']
-    }],
-    'comment-no-empty': true,
-    'comment-whitespace-inside': 'always',
+    // 'comment-empty-line-before': ['always', {
+    //   except: ['first-nested'],
+    //   ignore: ['stylelint-commands']
+    // }],
+    // 'comment-no-empty': true,
+    // 'comment-whitespace-inside': 'always',
     'custom-property-empty-line-before': ['always', {
       except: [
         'after-custom-property',
@@ -88,7 +87,6 @@ module.exports = {
     'media-query-list-comma-newline-after': 'always-multi-line',
     'media-query-list-comma-space-after': 'always-single-line',
     'media-query-list-comma-space-before': 'never',
-    'no-empty-source': true,
     'no-eol-whitespace': true,
     'no-extra-semicolons': true,
     'no-invalid-double-slash-comments': true,
