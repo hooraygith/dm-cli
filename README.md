@@ -1,5 +1,5 @@
 # dm-cli
-打包脚本集成
+格式化lint、打包等脚本集成
 
 ## install
 ```js
