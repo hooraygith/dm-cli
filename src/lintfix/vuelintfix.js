@@ -57,6 +57,8 @@ module.exports = function (filePath) {
             processQueue.style.childNodes[0].value = ((report.css.indexOf('\n') === 0) ? '' : '\n') + report.css
             resolve(true)
           })
+        } else {
+          resolve(true)
         }
       })]).then(() => {
         // 上报错误

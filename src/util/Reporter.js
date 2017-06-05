@@ -16,10 +16,9 @@ module.exports = {
           '',
           `${msg.line + lineOffset}:${msg.column}`,
           (msg.severity === 2) ? chalk.red(msg.ruleId) : chalk.yellow(msg.ruleId),
-          msg.message,
-          `\n${msg.source}`
+          msg.message
         ]
-      })))
+      })) + '\n')
     }
   },
   /*
