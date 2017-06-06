@@ -27,7 +27,7 @@ const Webpack = require('webpack')
 const webpackConfig = require(`${_DIR}/build/webpack.config.${env}.js`)
 const serverConfig = require(`${_DIR}/build/server.config.json`)
 
-webpackConfig.entry.index.unshift(`webpack-dev-server/client?http://${serverConfig.host}/`, 'webpack/hot/dev-server')
+webpackConfig.entry.bootstrap.unshift(`webpack-dev-server/client?http://${serverConfig.host}/`, 'webpack/hot/dev-server')
 webpackConfig.plugins.push(new Webpack.HotModuleReplacementPlugin())
 webpackConfig.output.filename = '[name].[hash].js'
 
