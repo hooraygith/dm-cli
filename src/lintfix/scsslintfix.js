@@ -19,11 +19,11 @@ module.exports = function (filePath) {
           lineOffset: 0,
           lintError
         })
-        // 上报错误
-        resolve(lintError)
         // 写入格式化的内容
         fs.writeFileSync(filePath, report.css)
         console.log(`${filePath} has formated`)
+        // 上报错误
+        resolve(lintError)
       })
     })
   })

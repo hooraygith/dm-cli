@@ -61,11 +61,11 @@ module.exports = function (filePath) {
           resolve(true)
         }
       })]).then(() => {
-        // 上报错误
-        resolve(lintError)
         // 写入格式化的内容
         fs.writeFileSync(filePath, parser.serialize(fragment))
         console.log(`${filePath} has formated`)
+        // 上报错误
+        resolve(lintError)
       })
     })
   })
