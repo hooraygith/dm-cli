@@ -37,8 +37,8 @@
     "stylelint-config-standard": "^16.0.0",
     "stylelint-processor-html": "1.0.0",
     "text-table": "0.2.0",
-    "webpack": "2.3.3",
-    "webpack-dev-server": "2.4.2"
+    "webpack": "2.6.1",
+    "webpack-dev-server": "2.4.5"
   },
   "devDependencies": {
     "husky": "0.13.3"
