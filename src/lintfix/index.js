@@ -7,7 +7,7 @@ const scsslintfix = require('./scsslintfix.js')
 const vuelintfix = require('./vuelintfix.js')
 const Reporter = require('../util/Reporter.js')
 
-module.exports = module.exports.default = function (files) {
+module.exports = module.exports.default = function (files, callback) {
   cmd.log('============ lint start ============')
 
   Promise.all(files.map((f) => {
@@ -22,5 +22,7 @@ module.exports = module.exports.default = function (files) {
     Reporter.report(lintError)
 
     cmd.log('============ lint end ============')
+
+    callback && callback()
   })
 }
