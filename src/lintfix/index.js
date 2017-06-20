@@ -11,7 +11,7 @@ module.exports = module.exports.default = function (files, callback) {
   cmd.log('============ lint start ============')
 
   Promise.all(files.map((f) => {
-    if (f.match(/\.(js)$/gi)) {
+    if (f.match(/^(?!.+\.min.js$).+\.js$/gi)) { // 压缩文件不检测
       return jslintfix(f)
     } else if (f.match(/\.(scss)$/gi)) {
       return scsslintfix(f)
