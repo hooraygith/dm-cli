@@ -8,7 +8,8 @@
 * [tag](/howtouse?id=tag) tag处理
 * [start](/howtouse?id=start) 启动服务
 * [build](/howtouse?id=build) 构建
-* [pack](/howtouse?id=pack) 打包
+* [pack](/howtouse?id=pack) 打包（旧版）
+* [pack](/howtouse?id=package) 打包（新版）
 * [compile-pre](/howtouse?id=compile-pre) 编译前置钩子
 * [compile](/howtouse?id=compile) 编译处理钩子
 * [compile-post](/howtouse?id=compile-post) 编译后置钩子

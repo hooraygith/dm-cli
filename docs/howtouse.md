@@ -94,6 +94,9 @@ dm pack [newVersion] [envs...]
   dm pack prerelease //如果打包前版本号为1.0.1-0，输出版本号 1.0.1-1
 ```
 
+## package
+!> 相当于 `dm pack [newVersion] dist`
+
 ## compile-pre
 ```shell
 dm compile-pre [env]
