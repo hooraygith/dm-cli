@@ -63,7 +63,7 @@ dm build [envs]
 ```
 
 ## pack
-!> 执行打包命令，主要用于非主项目打包，输出js
+!> 执行打包命令，主要用于项目打包，输出js
 ```shell
 dm pack [newVersion] [envs...]
 - [newVersion] 同 npm version [major | minor | patch | premajor | preminor | prepatch | prerelease]
@@ -93,9 +93,6 @@ dm pack [newVersion] [envs...]
   dm pack prerelease //如果打包前版本号为1.0.0，输出版本号 1.0.1-0
   dm pack prerelease //如果打包前版本号为1.0.1-0，输出版本号 1.0.1-1
 ```
-
-## package
-!> 相当于 `dm pack [newVersion] dist`
 
 ## compile-pre
 ```shell
