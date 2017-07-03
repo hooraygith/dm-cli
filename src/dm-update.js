@@ -2,7 +2,7 @@
 
 // const shell = require('shelljs')
 const cmd = require('./util/cmd.js')
-    // const program = require('commander')
+// const program = require('commander')
 const _DIR = process.cwd()
 const packageInfo = require(`${_DIR}/package.json`)
 
@@ -21,7 +21,7 @@ let updateJson = JSON.parse(cmd.exec(command1, {
 for (let i in updateJson) {
   let version = updateJson[i].wanted
   if (version === updateJson[i].current) {
-        // is update to date
+    // is update to date
   } else if (version === 'git') {
     updatePkg.push(i)
   } else {
@@ -45,7 +45,7 @@ if (packageInfo.devDependencies) {
   }
 }
 
-updatePkg = Array.from(new Set(updatePkg))// 数组去重
+updatePkg = Array.from(new Set(updatePkg)) // 数组去重
 
 // 如果都为空则提示全部更新完毕
 if (!updatePkg.length) {
@@ -54,5 +54,8 @@ if (!updatePkg.length) {
 }
 
 let date = new Date()
-cmd.exec(`${command2} ${updatePkg.join(' ')}`)
+for (let i = 0, len = updatePkg.length; i < len; i += 10) {
+  console.log(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
+  cmd.exec(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
+}
 spinner.succeed(`end ${(new Date().getTime() - date) / 1000} s`)
