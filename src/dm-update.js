@@ -10,7 +10,7 @@ const ora = require('ora')
 const config = require('./config/index.js')
 
 let command1 = `npm outdated --json --registry=${config.registry}\n` // 检查需要更新的包
-let command2 = `npm i --registry=${config.registry}` // 更新包
+let command2 = `npm i --registry=${config.registry} --sass_binary_site=${config.sass_binary_site}` // 更新包
 let spinner = ora(command1).start() // 加载动画
 let updatePkg = [] // 要更新的包
 
