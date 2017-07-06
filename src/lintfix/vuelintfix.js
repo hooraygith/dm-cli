@@ -17,6 +17,7 @@ module.exports = function (filePath) {
     let fragment // dom
     let childNodes // dom子节点组
     let processQueue // 处理队列
+    let writeQueue // 文件单独写入队列，hack parse5导致html变小写
     setTimeout(() => {
       lintError = {
         filePath: filePath,
@@ -26,6 +27,7 @@ module.exports = function (filePath) {
       fragment = parser.parseFragment(fileContent)
       childNodes = fragment.childNodes
       processQueue = parseVueTemplate(childNodes)
+      writeQueue = []
 
       Promise.all([new Promise((resolve) => {
           // 处理es
@@ -38,8 +40,8 @@ module.exports = function (filePath) {
             lineOffset: getLineOffset(scriptString, fileContent),
             lintError
           })
-            // 将lint后的值写入dom
-          processQueue.script.childNodes[0].value = report.results[0].output || scriptString
+          // 将lint后的值放进文件写入处理队列
+          writeQueue.push([scriptString, report.results[0].output || scriptString])
         }
         resolve(true)
       }), new Promise((resolve) => {
@@ -54,7 +56,8 @@ module.exports = function (filePath) {
               lineOffset: getLineOffset(styleString, fileContent) + 1,
               lintError
             })
-            processQueue.style.childNodes[0].value = ((report.css.indexOf('\n') === 0) ? '' : '\n') + report.css
+            // 将lint后的值放进文件写入处理队列
+            writeQueue.push([styleString, ((report.css.indexOf('\n') === 0) ? '' : '\n') + report.css])
             resolve(true)
           })
         } else {
@@ -62,7 +65,10 @@ module.exports = function (filePath) {
         }
       })]).then(() => {
         // 写入格式化的内容
-        fs.writeFileSync(filePath, parser.serialize(fragment))
+        for (let item of writeQueue) {
+          fileContent = fileContent.replace(item[0], item[1])
+        }
+        fs.writeFileSync(filePath, fileContent)
         console.log(`${filePath} has formated`)
         // 上报错误
         resolve(lintError)
