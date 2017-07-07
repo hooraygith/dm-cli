@@ -9,7 +9,8 @@ module.exports = function (input) {
     postcss([
       stylefmt({
         configBasedir: __dirname,
-        config: stylelintrc
+        config: stylelintrc,
+        extends: 'stylelint-config-idiomatic-order'
       })
     ]).process(input, {
       syntax: scss
@@ -18,6 +19,7 @@ module.exports = function (input) {
         code: result.css,
         configBasedir: __dirname,
         config: stylelintrc,
+        extends: 'stylelint-config-idiomatic-order',
         syntax: 'scss'
       }).then((output) => {
         output.css = result.css
