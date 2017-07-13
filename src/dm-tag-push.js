@@ -10,14 +10,14 @@ let tag = ''
 program
   .arguments('[tag]')
   .action(val => {
-    tag = val
+      tag = val
   })
   .parse(process.argv)
 
 if (!tag) {
   // 检测是否输入tag
-  cmd.error('Pleae enter tag value! tag push [tag]')
-  process.exit(1)
+    cmd.error('Pleae enter tag value! tag push [tag]')
+    process.exit(1)
 }
 
 cmd.exec(`git push origin ${tag}`)

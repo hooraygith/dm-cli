@@ -1,10 +1,10 @@
-module.exports = function (childNodes) {
-  let processQueue = {}
-  for (let node of childNodes) {
-    if (node.nodeName === 'script') {
-      node.attrs = []
-      processQueue.script = node
-    } else if (node.nodeName === 'style') {
+module.exports = function(childNodes) {
+    let processQueue = {}
+    for (let node of childNodes) {
+        if (node.nodeName === 'script') {
+            node.attrs = []
+            processQueue.script = node
+        } else if (node.nodeName === 'style') {
       // const attrs = []
       //
       // for (let item of node.attrs) {
@@ -17,8 +17,8 @@ module.exports = function (childNodes) {
       //   }
       // }
       // node.attrs = attrs
-      processQueue.style = node
+            processQueue.style = node
+        }
     }
-  }
-  return processQueue
+    return processQueue
 }

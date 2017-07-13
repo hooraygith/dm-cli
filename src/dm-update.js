@@ -16,46 +16,46 @@ let updatePkg = [] // 要更新的包
 
 // 获取过期的包json
 let updateJson = JSON.parse(cmd.exec(command1, {
-  silent: true
+    silent: true
 }) || '{}')
 for (let i in updateJson) {
-  let version = updateJson[i].wanted
-  if (version === updateJson[i].current) {
+    let version = updateJson[i].wanted
+    if (version === updateJson[i].current) {
     // is update to date
-  } else if (version === 'git') {
-    updatePkg.push(i)
-  } else {
-    updatePkg.push(`${i}@${version}`)
-  }
+    } else if (version === 'git') {
+        updatePkg.push(i)
+    } else {
+        updatePkg.push(`${i}@${version}`)
+    }
 }
 
 // 获取依赖中以git+ssh方式引入的包
 if (packageInfo.dependencies) {
-  for (let i in packageInfo.dependencies) {
-    if (packageInfo.dependencies[i].indexOf('git+ssh') > -1) {
-      updatePkg.push(i)
+    for (let i in packageInfo.dependencies) {
+        if (packageInfo.dependencies[i].indexOf('git+ssh') > -1) {
+            updatePkg.push(i)
+        }
     }
-  }
 }
 if (packageInfo.devDependencies) {
-  for (let i in packageInfo.devDependencies) {
-    if (packageInfo.devDependencies[i].indexOf('git+ssh') > -1) {
-      updatePkg.push(i)
+    for (let i in packageInfo.devDependencies) {
+        if (packageInfo.devDependencies[i].indexOf('git+ssh') > -1) {
+            updatePkg.push(i)
+        }
     }
-  }
 }
 
 updatePkg = Array.from(new Set(updatePkg)) // 数组去重
 
 // 如果都为空则提示全部更新完毕
 if (!updatePkg.length) {
-  spinner.succeed('Already up-to-date!')
-  process.exit(0)
+    spinner.succeed('Already up-to-date!')
+    process.exit(0)
 }
 
 let date = new Date()
 for (let i = 0, len = updatePkg.length; i < len; i += 10) {
-  console.log(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
-  cmd.exec(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
+    console.log(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
+    cmd.exec(`${command2} ${updatePkg.slice(i, i + 10).join(' ')}`)
 }
 spinner.succeed(`end ${(new Date().getTime() - date) / 1000} s`)

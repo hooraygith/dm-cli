@@ -2,19 +2,19 @@
 
 const eslint = require('eslint')
 
-module.exports = function (input) {
-  let cliEngine
-  try {
-    cliEngine = new eslint.CLIEngine({
-      fix: true,
-      baseConfig: {
-        extends: ['dianmife']
-      },
-      useEslintrc: false
-    })
-    return cliEngine.executeOnText(input)
-  } catch (err) {
-    console.log(err)
-    process.exit(1)
-  }
+module.exports = function(input) {
+    let cliEngine
+    try {
+        cliEngine = new eslint.CLIEngine({
+            fix: true,
+            baseConfig: {
+                extends: ['dianmife']
+            },
+            useEslintrc: false
+        })
+        return cliEngine.executeOnText(input)
+    } catch (err) {
+        console.log(err)
+        process.exit(1)
+    }
 }

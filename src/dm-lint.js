@@ -17,21 +17,21 @@ program.source = program.source || 'src' // npm run script 会忽略 -param 传�
 
 // Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), changed (T), Unmerged (U), Unknown (X), Broken (B)
 if (program.commit) {
-  let files = shell.exec('git diff --cached --name-only --diff-filter=ACMR', {silent: true}).stdout.split('\n')
-  vuefix(files, () => cmd.exec('git add -A'))
+    let files = shell.exec('git diff --cached --name-only --diff-filter=ACMR', {silent: true}).stdout.split('\n')
+    vuefix(files, () => cmd.exec('git add -A'))
 } else if (program.work) {
   // todo 工作区&&暂存区 检测
   // let files = shell.exec('git diff --cached --name-only --diff-filter=ACM', {silent: true}).stdout.split('\n')
   // vuefix(files)
   // cmd.exec('git add -A')
 } else {
-  if (shell.test('-d', program.source)) { // 当没有src目录时会报错，加个判断修复
-    recursive(program.source, [''], (err, files) => {
-      if (err) {
-        console.log(err)
-        process.exit(1)
-      }
-      vuefix(files)
-    })
-  }
+    if (shell.test('-d', program.source)) { // 当没有src目录时会报错，加个判断修复
+        recursive(program.source, [''], (err, files) => {
+            if (err) {
+                console.log(err)
+                process.exit(1)
+            }
+            vuefix(files)
+        })
+    }
 }

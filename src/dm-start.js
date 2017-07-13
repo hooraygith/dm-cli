@@ -10,14 +10,14 @@ let env = ''
 program
     .arguments('[env]')
     .action(val => {
-      env = val
+        env = val
     })
     .parse(process.argv)
 
 env = env || 'dev-server'
 
 if (!shell.test('-f', `${_DIR}/build/webpack.config.${env}.js`)) {
-  cmd.error(`找不到文件：${_DIR}/build/webpack.config.${env}.js`)
+    cmd.error(`找不到文件：${_DIR}/build/webpack.config.${env}.js`)
 }
 
 cmd.exec(`dm compile-pre ${env}`)
@@ -27,24 +27,24 @@ const Webpack = require('webpack')
 const webpackConfig = require(`${_DIR}/build/webpack.config.${env}.js`)
 const serverConfig = require(`${_DIR}/build/server.config.json`)
 
-Object.keys(webpackConfig.entry).forEach(function (name) {
-  webpackConfig.entry[name] = [`webpack-dev-server/client?http://${serverConfig.host}/`, 'webpack/hot/dev-server'].concat(webpackConfig.entry[name])
+Object.keys(webpackConfig.entry).forEach(function(name) {
+    webpackConfig.entry[name] = [`webpack-dev-server/client?http://${serverConfig.host}/`, 'webpack/hot/dev-server'].concat(webpackConfig.entry[name])
 })
 webpackConfig.plugins.push(new Webpack.HotModuleReplacementPlugin())
 webpackConfig.output.filename = '[name].[hash].js'
 
 let server = new WebpackDevServer(Webpack(webpackConfig), {
     // hot: true,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
-  },
-  stats: {
-    chunks: false, // Makes the build much quieter
-    colors: true
-  },
-  historyApiFallback: true
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+    },
+    stats: {
+        chunks: false, // Makes the build much quieter
+        colors: true
+    },
+    historyApiFallback: true
 })
 server.listen(serverConfig.port, 'localhost', () => {
-  console.log(`正  在  编  译  中  ...  片  刻  后  可  访  问  http://${serverConfig.host}`)
+    console.log(`正  在  编  译  中  ...  片  刻  后  可  访  问  http://${serverConfig.host}`)
 })

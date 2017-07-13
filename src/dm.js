@@ -14,4 +14,5 @@ program
   .command('compile-pre', '编译前置钩子')
   .command('compile', '编译处理钩子')
   .command('compile-post', '编译后置钩子')
+  .command('iconfont', '更新iconfont')
   .parse(process.argv)

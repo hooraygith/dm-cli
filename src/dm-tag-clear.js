@@ -11,20 +11,20 @@ program
     .option('-A, --all', '删除全部tag')
     .arguments('[regexp]')
     .action(val => {
-      regexp = val
+        regexp = val
     })
     .parse(process.argv)
 
 if (program.all) {
     // 删除本地全部tag
-  cmd.exec('git tag -l | xargs git tag -d')
-  process.exit(0)
+    cmd.exec('git tag -l | xargs git tag -d')
+    process.exit(0)
 }
 
 if (!regexp) {
     // 检测是否输入patterns
-  cmd.error('Please enter regexp! tag clear [regexp]')
-  process.exit(1)
+    cmd.error('Please enter regexp! tag clear [regexp]')
+    process.exit(1)
 }
 
 cmd.exec(

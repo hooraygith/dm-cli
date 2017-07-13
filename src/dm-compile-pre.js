@@ -10,14 +10,14 @@ let env = ''
 program
     .arguments('[env]')
     .action(val => {
-      env = val
+        env = val
     })
     .parse(process.argv)
 
 if (!env) {
-  cmd.error('缺少环境变量 dm compile-pre [环境名]')
+    cmd.error('缺少环境变量 dm compile-pre [环境名]')
 }
 
 if (shell.test('-f', `${_DIR}/build/compile-pre.js`)) {
-  cmd.exec(`node ${_DIR}/build/compile-pre.js ${env}`)
+    cmd.exec(`node ${_DIR}/build/compile-pre.js ${env}`)
 }

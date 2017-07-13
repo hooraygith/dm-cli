@@ -11,8 +11,8 @@ let envs = []
 program
     .arguments('[newVersion] [envs...]')
     .action((val, val2) => {
-      type = val
-      envs = val2.length ? val2 : ['dev', 'pd']
+        type = val
+        envs = val2.length ? val2 : ['dev', 'pd']
     })
     .parse(process.argv)
 
