@@ -20,6 +20,7 @@ if (!fileName) {
 
 cmd.log('============ iconfont update ============')
 
+axios.defaults.baseURL = 'http://at.alicdn.com'
 axios.get(`/t/${fileName}.css`).then(function(data) {
     let str = '/* iOS 4.1- */\n}'
     let arr1 = data.data.split(str)
