@@ -29,6 +29,16 @@ dm lint [-S -source] [-C, --commit]
   dm lint -C //格式化git暂存区的文件
 ```
 
+## iconfont
+!> 更新iconfont字体文件（其实就是将[iconfont](http://www.iconfont.cn/)字体文件做了一些转换后写入到`src/iconfont.scss`中）
+
+```shell
+dm iconfont fileName
+- fileName 要写入的文件名
+  例如：
+  dm iconfont font_kuxgx2zdzrtz9f6r
+```
+
 ## tag
 ```shell
 dm tag [command]

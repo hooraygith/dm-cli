@@ -26,5 +26,5 @@ axios.get(`/t/${fileName}.css`).then(function(data) {
     let arr1 = data.data.split(str)
     let arr2 = data.data.split('-moz-osx-font-smoothing: grayscale;\n}')
     fs.writeFile('src/iconfont.scss', `${arr1[0]}${str}${arr2[1].replace(/:before/g, '::before')}`)
-    cmd.log('============ end ============')
+    cmd.log('============ success ============')
 })
