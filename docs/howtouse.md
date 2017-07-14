@@ -79,18 +79,19 @@ dm build [envs]
 ## pack
 !> 执行打包命令，主要用于项目打包，输出js
 ```shell
-dm pack [newVersion]
-- [newVersion] 同 npm version [major | minor | patch | premajor | preminor | prepatch | prerelease]
+dm pack [version] [name]
+- [version] 同 npm version [major | minor | patch | premajor | preminor | prepatch | prerelease]
 - 内部执行顺序
   - `dm update` 更新依赖
   - `dm lint` 格式化
   - `dm tag fetch` 获取服务器最新的tag
-  - `npm --no-git-tag-version version ${newVersion}` 修改package.json输出本次打包版本号`version`
+  - `version = semver.valid(version)?version:semver.inc(version,name)` 获得变化后的版本号 `version` [semver](https://github.com/npm/node-semver#prerelease-identifiers)
+  - `npm --no-git-tag-version version ${version}` 修改package.json版本号
   - `dm build dev pd` 构建非压缩和压缩代码
   - `git add -A` 添加到暂存区
-  - `git commit -m '${version.replace('v', '')}' -n` commit提交信息
-  - `git tag ${version}` 创建本次打包tag
-  - `git push origin ${version}` 提交tag到服务器
+  - `git commit -m '${version}' -n` commit提交信息
+  - `git tag v${version}` 创建本次打包tag
+  - `git push origin v${version}` 提交tag到服务器
   - `git symbolic-ref --short -q HEAD` 获得当前分支 `branch`
   - `git push origin ${branch}` 提交分支到服务器
 - 例如：
@@ -105,7 +106,14 @@ dm pack [newVersion]
   dm pack prepatch //如果打包前版本号为1.0.0，输出版本号 1.0.1-0
   dm pack prepatch //如果打包前版本号为1.0.1-0，输出版本号 1.0.2-0
   dm pack prerelease //如果打包前版本号为1.0.0，输出版本号 1.0.1-0
-  dm pack prerelease //如果打包前版本号为1.0.1-0，输出版本号 1.0.1-1
+  dm pack prepatch rc //如果打包前版本号为1.0.0，输出版本号 1.0.1-rc.0
+  dm pack prepatch rc //如果打包前版本号为1.0.1-rc.0，输出版本号 1.0.2-rc.0
+  dm pack prerelease rc //如果打包前版本号为1.0.0，输出版本号 1.0.1-rc.0
+  dm pack prerelease rc //如果打包前版本号为1.0.1-rc.0，输出版本号 1.0.1-rc.1
+  dm pack premajor rc //如果打包前版本号为1.0.0，输出版本号 2.0.0-rc.0
+  dm pack premajor rc //如果打包前版本号为2.0.0-rc.0，输出版本号 3.0.0-rc.0
+  dm pack preminor rc //如果打包前版本号为1.0.0，输出版本号 1.1.0-rc.0
+  dm pack preminor rc //如果打包前版本号为1.1.0-rc.0，输出版本号 1.2.0-rc.0
 ```
 
 ## compile-pre
