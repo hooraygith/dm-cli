@@ -11,7 +11,7 @@ let type = ''
 let version = packageInfo.version
 
 program
-    .arguments('[newVersion...]')
+    .arguments('[version...]')
     .action((val) => {
         type = val
     })
@@ -33,7 +33,7 @@ cmd.exec(`dm build dev pd`)
 cmd.exec('git add -A')
 cmd.exec(`git commit -m '${version}' -n`)
 cmd.exec(`git tag v${version}`)
-cmd.exec(`git push origin ${version}`)
+cmd.exec(`git push origin v${version}`)
 
 let branch = cmd.exec('git symbolic-ref --short -q HEAD')
 cmd.exec(`git push origin ${branch}`)
