@@ -77,7 +77,7 @@ dm build [envs]
 ```
 
 ## pack
-!> 执行打包命令，主要用于项目打包，输出js,[semver参考](https://github.com/npm/node-semver#prerelease-identifiers)
+!> 执行打包命令，主要用于项目打包，输出js；[semver参考](https://github.com/npm/node-semver#prerelease-identifiers)
 ```shell
 dm pack [version] [name]
 - [version] 同 npm version [major | minor | patch | premajor | preminor | prepatch | prerelease]
