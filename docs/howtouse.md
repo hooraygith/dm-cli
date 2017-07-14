@@ -61,6 +61,7 @@ dm tag [command]
 ```shell
 dm start
 - 首先读取server配置 `${_DIR}/build/server.config.json` 获取host、post
+- 首先读取proxy配置 `${_DIR}/build/proxy.json` 获取proxy
 - 然后读取webpack配置 `${_DIR}/build/webpack.config.dev-server.js`
 - 启动
 ```
