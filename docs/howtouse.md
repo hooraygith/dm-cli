@@ -77,7 +77,7 @@ dm build [envs]
 ```
 
 ## pack
-!> 执行打包命令，主要用于项目打包，输出js
+!> 执行打包命令，主要用于项目打包，输出js,[semver参考](https://github.com/npm/node-semver#prerelease-identifiers)
 ```shell
 dm pack [version] [name]
 - [version] 同 npm version [major | minor | patch | premajor | preminor | prepatch | prerelease]
@@ -85,7 +85,7 @@ dm pack [version] [name]
   - `dm update` 更新依赖
   - `dm lint` 格式化
   - `dm tag fetch` 获取服务器最新的tag
-  - `version = semver.valid(version)?version:semver.inc(version,name)` 获得变化后的版本号 `version` [semver](https://github.com/npm/node-semver#prerelease-identifiers)
+  - `version = semver.valid(version)?version:semver.inc(version,name)` 获得变化后的版本号 `version`
   - `npm --no-git-tag-version version ${version}` 修改package.json版本号
   - `dm build dev pd` 构建非压缩和压缩代码
   - `git add -A` 添加到暂存区
