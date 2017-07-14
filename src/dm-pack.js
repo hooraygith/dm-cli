@@ -11,7 +11,7 @@ let type = ''
 let version = packageInfo.version
 
 program
-    .arguments('[newVersion]')
+    .arguments('[newVersion...]')
     .action((val) => {
         type = val
     })
@@ -27,7 +27,7 @@ if (semver.valid(type[0])) {
 } else {
     version = semver.inc(version, type[0], type[1])
 }
-cmd.exec(`npm --no-git-tag-version version ${type}`)
+cmd.exec(`npm --no-git-tag-version version ${version}`)
 cmd.exec(`dm build dev pd`)
 
 cmd.exec('git add -A')
